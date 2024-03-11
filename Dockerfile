@@ -1,4 +1,15 @@
-FROM tomcat:8.0.20-jre8
-MAINTAINER Ashok <ashok@oracle.com>
-EXPOSE 8080
-COPY target/maven-web-app.war /usr/local/tomcat/webapps/maven-web-app.war
+FROM openjdk:11-jre-slim
+
+WORKDIR home/janardhan/node
+
+COPY pom.xml .
+
+COPY src ./src
+
+RUN apt-get update && apt-get install -y maven
+RUN mvn clean package
+
+COPY target/*.jar node.jar
+
+CMD ["java", "-jar", "app.jar"]
+
