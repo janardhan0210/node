@@ -11,5 +11,5 @@ RUN mvn clean package
 
 COPY target/*.jar node.jar
 
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "node.jar"]
 
